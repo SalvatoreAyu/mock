@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #app1 {
+        width: 300px;
+        height: 500px;
+        background-color: red;
+      }
+      #app2 {
+        width: 300px;
+        height: 300px;
+        background-color: aqua;
+      }
+      #app3 {
+        width: 300px;
+        height: 300px;
+        background-color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app1"></div>
+    <div id="app2"></div>
+    <div id="app3"></div>
+    <script>
+      const app1 = document.getElementById('app1')
+      const app2 = document.getElementById('app2')
+      const app3 = document.getElementById('app3')
+      //ScrollTop 滚动条滚动的距离
+      function _getScrollTop() {
+        var scrollTop = 0,
+          bodyScrollTop = 0,
+          documentScrollTop = 0
+        if (document.body) {
+          bodyScrollTop = document.body.scrollTop
+        }
+        if (document.documentElement) {
+          documentScrollTop = document.documentElement.scrollTop
+        }
+        scrollTop = bodyScrollTop - documentScrollTop > 0 ? bodyScrollTop : documentScrollTop
+        return scrollTop
+      }
+
+      //文档实际内容真正的高度  包括只有移动滚动条才可以看到的内容
+      function _getScrollHeight() {
+        var scrollHeight = 0,
+          bodyScrollHeight = 0,
+          documentScrollHeight = 0
+        if (document.body) {
+          bodyScrollHeight = document.body.scrollHeight
+        }
+        if (document.documentElement) {
+          documentScrollHeight = document.documentElement.scrollHeight
+        }
+        scrollHeight = bodyScrollHeight - documentScrollHeight > 100 ? bodyScrollHeight : documentScrollHeight
+        return scrollHeight
+      }
+
+      //窗口可视化范围的高度
+      function _getClientHeight() {
+        var windowHeight = 0
+        if (document.compatMode == 'CSS1Compat') {
+          windowHeight = document.documentElement.clientHeight
+        } else {
+          windowHeight = document.body.clientHeight
+        }
+        return windowHeight
+      }
+      window.addEventListener('scroll', function () {
+        console.log(app1.offsetTop)
+        console.log(app2.offsetTop)
+        console.log(app3.offsetTop)
+        console.log('document.body.scrollTop', _getScrollTop())
+        console.log('document.body.scrollHeight', _getScrollHeight())
+        console.log('document.body.clientHeight', _getClientHeight())
+      })
+    </script>
+  </body>
+</html>
